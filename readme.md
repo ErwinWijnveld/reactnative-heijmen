@@ -1,17 +1,3 @@
 ## Heijmen elektrotechniek app
 
-# (c) 2022 Heijmen elektrotechniek
-
-# License: MIT
-
-# Version: 1.0.0
-
-# Date: 2022-09-28
-
-# Description: Heijmen elektrotechniek app
-
-# Tags: heijmen, elektrotechniek, app
-
-# Authors: Erwin Wijnveld
-
-# URL:
+This is the app for Heijmen elektrotechniek. It is a simple app that lets mechanics and electricians register their hours and materials. It also lets them see their invoices and the invoices of their colleagues.
