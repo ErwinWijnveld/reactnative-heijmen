@@ -1,5 +1,5 @@
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -15,6 +15,7 @@ type LabelInputProps = {
 const LabelInput = (props: LabelInputProps) => {
 	const { title, input, placeholder, ...rest } = props;
 	const theme = useColorScheme();
+	const [clear, setClear] = useState(true);
 
 	return (
 		<View style={styles.container}>
@@ -24,14 +25,25 @@ const LabelInput = (props: LabelInputProps) => {
 				placeholder={placeholder}
 				ref={input}
 				style={styles.input}
+				onChangeText={(text: any) => {
+					setClear(text.length < 1);
+					props.onChangeText?.(text);
+				}}
 			/>
-			<Pressable onPress={() => input?.current?.clear()}>
-				<AntDesign
-					name="closecircle"
-					size={18}
-					color={Colors[theme].grayHighlight}
-				/>
-			</Pressable>
+			{!clear && (
+				<Pressable
+					onPress={() => {
+						input?.current?.clear();
+						setClear(true);
+					}}
+				>
+					<AntDesign
+						name="closecircle"
+						size={18}
+						color={Colors[theme].grayHighlight}
+					/>
+				</Pressable>
+			)}
 		</View>
 	);
 };
@@ -43,7 +55,6 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
-		paddingHorizontal: 16,
 	},
 	label: {
 		fontSize: 17,
